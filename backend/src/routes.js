@@ -9,9 +9,6 @@ const SessionController = require('./controllers/SessionController');
 
 const routes = express.Router();
 
-
-
-
 routes.get('/ongs',ongcontroller.index);
 routes.post('/ongs',ongcontroller.create);
 

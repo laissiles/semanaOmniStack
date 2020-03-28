@@ -1,17 +1,21 @@
+/*componente: uma funcção em JS que retorna HTML
+quando o HTML está dentro de um código em js, é chamado de JSX (javascript xml)
+- propriedade quase igual a atributos em html (por exemplo um id) so que no caso do JS
+são "atributos passados para componentes"
+- Estado - informação mantida pelo componente
+- let: para varivais que "mudam" de valor 
+
+
+
+*/
+
+
+
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
-import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+ReactDOM.render(<App />, document.getElementById('root'));
+
+
