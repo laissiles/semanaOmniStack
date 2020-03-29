@@ -7,7 +7,7 @@
 
     display: flex; /* deixa os itens ao lado do outro, a não ser q seja usado tbm a função flex-direction:;*/
     align-items: center; /*centraliza os objetos verticalmente*/
-    justify-content: center;/*centraliza os objetos horizontalmente*/
+    justify-content: space-between;/*centraliza os objetos horizontalmente*/
 
 }
 

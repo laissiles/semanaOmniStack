@@ -13,15 +13,21 @@ export default function Register(){
                 <section>
                     <img src={logo} alt="logo"/>
                     <h1>Cadastro</h1>
-                    <p>Faça seu cadastro!</p>
-                    <Link className="back-link" to="/register">
+                    <p>Faça seu cadastro em nossa plataforma!</p>
+                    <Link className="back-link" to="/">
                      <FiArrowLeft size={16} color="#e02041" />
-                     não tenho cadastro</Link>
-
-
-
+                     Não tenho cadastro</Link>
                 </section>
                 <form>
+                    <input placeholder="nome da ONG"/>
+                    <input type="email" placeholder="Email"/>
+                    <input placeholder="WhatsApp"/>
+
+                    <div className="input-group">
+                      <input placeholder="Cidade"/>
+                      <input placeholder="UF" style={{width:80}}/>                
+                    </div>
+                    <button className="button" type="submit">Cadastrar</button>
 
                 </form>
             </div>
