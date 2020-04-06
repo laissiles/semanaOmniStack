@@ -2,17 +2,27 @@ import React from 'react';
 import {View} from 'react-native';
 import styles from './styles'
 import logoimg from '../../assets/logo.png'
-import {Image, Text, TouchableOpacity} from 'react-native';
-import {useNavigation} from '@react-navigation/native'
+import {Image, Text, TouchableOpacity,Linking} from 'react-native';
+import {useNavigation, useRoute} from '@react-navigation/native'
 import {Feather} from '@expo/vector-icons';
 import * as MailComposer from 'expo-mail-composer';
 
 
 
 export default function Detail(){
+   
+
 
     const navigation = useNavigation();
-    const message = 'Olá, quero ajudar na caminha nova,'
+    const route = useRoute();
+    const incident = route.params.incident;
+    
+    const message = `Olá, gostaria de ajudar com o valor de ${Intl.NumberFormat('pt-br', 
+    { style: 'currency', 
+    currency:'BRL'
+    }).format(incident.value)}` 
+
+    
 
     function navigateBack(){
         navigation.goBack();
@@ -20,8 +30,8 @@ export default function Detail(){
 
     function sendEmail(){       
      MailComposer.composeAsync({
-        subject: "Heroi do caso: Caminha nova para zara",
-        recipients: ['laislevine@gmail.com'],
+        subject: `Herói do caso:${incident.title} `,
+        recipients: [incident.email],
         body: message,
      })     
 
@@ -29,8 +39,7 @@ export default function Detail(){
 
 
     function sendWhatsapp(){
-
-
+    Linking.openURL(`whatsapp://send?phone=${incident.whatsapp}&text=${message}`)
     }
     return(
         <View style={styles.containner}>
@@ -46,13 +55,19 @@ export default function Detail(){
 
             <View style={styles.incident}>
             <Text style={styles.incidenPropety}>ONG</Text>
-                    <Text style={styles.incidenValue}>APAD</Text>
+    <Text style={styles.incidenValue}>{incident.name} de {incident.city}-{incident.uf}</Text>
 
                     <Text style={styles.incidenPropety}>CASO</Text>
-                    <Text style={styles.incidenValue}>Caminha nova pra Zara e Zeus</Text>
+    <Text style={styles.incidenValue}>{incident.title}</Text>
+
+    <Text style={styles.incidenPropety}>Descrição</Text>
+    <Text style={styles.incidenValue}>{incident.description}</Text>
 
                     <Text style={styles.incidenPropety}>VALOR:</Text>
-                    <Text style={styles.incidenValue}>100,00</Text> 
+    <Text style={styles.incidenValue}>{Intl.NumberFormat('pt-br', 
+                    { style: 'currency', 
+                    currency:'BRL'
+                    }).format(incident.value)}</Text> 
            
                   </View>  
 
@@ -63,7 +78,7 @@ export default function Detail(){
 
                     <View style={styles.action}>
 
-                        <TouchableOpacity style={styles.actions} onPress={()=>{}}>
+                        <TouchableOpacity style={styles.actions} onPress={sendWhatsapp}>
                             <Text style={styles.actionText}>Whatsapp</Text>
                         </TouchableOpacity>
 
