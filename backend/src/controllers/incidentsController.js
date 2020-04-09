@@ -22,7 +22,7 @@ module.exports = {
             'ongs.uf'
         ]);
 
-        response.header('total-casos', count['count(*)'])// não usar espaços 
+        response.header('total-casos', count['count(*)']-1)// não usar espaços 
         
            return response.json(incidents);
     },

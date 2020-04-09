@@ -8,11 +8,10 @@ import api from '../../services/api';
 
 export default function Incidents(){
     const [incidents, setIncident]= useState([]);
-    const [total, setTotal] = useState([]);
+    const [total, setTotal] = useState([0]);    
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false);
-
-    console.log("teste total" +total)
+    
 
     const navigation= useNavigation();
 
@@ -22,7 +21,6 @@ export default function Incidents(){
     }
 
     async function loadIncident(){
-
         if(loading){
             return;
         }
@@ -33,13 +31,11 @@ export default function Incidents(){
 
         setLoading(true);
 
-        const response = await api.get('incidents', {
-            params:{page}
-        });
+const response = await api.get(`incidents?page=${page}`)
         
-        setIncident([...incidents, ...response.data]);
+        setIncident([...incidents, ...response.data])
         setTotal(response.headers['total-casos'])
-        setPage(page+1)
+        setPage(page+1)            
         setLoading(false);
 
     }
@@ -69,7 +65,7 @@ export default function Incidents(){
                 //showsVerticalScrollIndicator={false}
                 onEndReached= {loadIncident}
                 onEndReachedThreshold={0.2}
-                renderItem={({item:incident})=>(
+                renderItem={({ item: incident})=>(
                     <View  style={styles.incident}>
                     <Text style={styles.incidenPropety}>ONG</Text>
                     <Text style={styles.incidenValue}>{incident.name}</Text>
